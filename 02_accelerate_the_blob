@@ -1,0 +1,68 @@
+x = 375;
+y = 250;
+
+//Initial velocity
+vx = 25;
+vy = 25;
+
+ax = 0;
+ay = 0;
+
+dt = 0.1;
+
+function draw(){
+
+  	// Update velocity
+  	vx += ax*dt;
+    vy += ay*dt;
+   
+    // Update location
+    x += vx*dt;
+    y += vy*dt;
+
+    // acceleration is zero unless keys are pressed
+    //downward acceleration, like gravity
+    ax = 0;
+    ay = -2;
+  
+    // Turn or thrust the ship depending on what key is pressed
+    if (keyIsDown(LEFT_ARROW)) {
+       ax = -2
+    }
+    if (keyIsDown(RIGHT_ARROW)) {
+        ax = 2;
+    }
+    if (keyIsDown(UP_ARROW)) {
+       ay = 2
+    }
+    if (keyIsDown(DOWN_ARROW)) {
+       ay = -2
+    }
+  
+    // Draw axes and other stuff
+    // This will clear the screen and re-draw it
+    display();
+  
+    drawBlob(x,y,vx,vy,ax,ay);
+    // Add more graphics here before the end of draw()
+  
+    //track the path
+    for( i = 0; i < xhistory.length ; i+= 1) {
+     drawPoint(xhistory[i],yhistory[i]); 
+    }
+  
+    //graph velocity and acceleration in x
+    //graph1.addPoint(vx);
+    //graph1.display();
+
+    //graph2.addPoint(ax);
+    //graph2.display();
+  
+  //graph velocity and acceleration in y
+    graph1.addPoint(vy);
+    graph1.display();
+
+    graph2.addPoint(ay);
+    graph2.display();
+
+} // end draw()   DO NOT ADD ANY CODE AFTER THIS LINE!!!
