@@ -1,0 +1,53 @@
+x = 375;
+y = 250;
+
+vx = 0;
+vy = 0;
+
+dt = 0.1;
+
+function draw(){
+  
+    // Update location
+    x += vx*dt;
+    y += vy*dt;
+
+    // velocity is zero unless keys are pressed
+    vx = 0;
+    vy = 0;
+
+    // Turn or thrust the ship depending on what key is pressed
+    if (keyIsDown(LEFT_ARROW)) {
+      vx = -10
+    }
+    if (keyIsDown(RIGHT_ARROW)) {
+       vx = 10;
+    }
+    if (keyIsDown(UP_ARROW)) {
+      vy = 10;
+    }
+    if (keyIsDown(DOWN_ARROW)) {
+      vy = -10;
+    }
+
+    // Draw axes and other stuff
+    display();      
+    
+    drawBlob(x,y,vx,vy);
+    // Add more graphics here before the end of draw()
+  
+    //trace the path
+    for( i = 0; i < xhistory.length ; i+= 1) {
+     drawPoint(xhistory[i],yhistory[i]);
+    }
+    
+    //x velocity as a function of time
+    graph1.addPoint(vx);
+    graph1.display();
+    
+    //y velocity as a function of time
+    graph2.addPoint(vy);
+    graph2.display();
+  
+  
+} // end draw()   DO NOT ADD ANY CODE AFTER THIS LINE!!!
