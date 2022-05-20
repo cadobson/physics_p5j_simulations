@@ -14,6 +14,7 @@ g = -1.63;//magnitude, positive
 dt = 0.1;
 
 t = 0;
+fuel = 300;
 
 function draw(){
 
@@ -32,15 +33,19 @@ function draw(){
     // Thrust the ship depending on what key is pressed
     if (keyIsDown(LEFT_ARROW)) {
         Fx = -15;
+        fuel--;
     }
     if (keyIsDown(RIGHT_ARROW)) {
         Fx = 15;
+        fuel--;
     }
     if (keyIsDown(UP_ARROW)) {
-    	Fy = 15;     
+    	Fy = 15;
+        fuel--;
     }
     if (keyIsDown(DOWN_ARROW)) {
     	Fy = -15;
+        fuel--;
     }
   
     // Draw axes and other stuff
@@ -71,10 +76,23 @@ function draw(){
       vy = 0;
       exit();
     }
+    
+    if ( fuel <= 0) {
+      drawText('You\'re out of fuel...',width/3,height/2);		      
+      ax = 0;
+      ay = 0;
+      vx = 0;
+      vy = 0;
+      exit();
+    }
   
     //timer
     t += dt;
     drawText('time = ',0.75*width,0.75*height);
     drawText(t,0.85*width,0.75*height);
+  
+    //fuel
+    drawText('fuel = ',0.75*width,0.7*height);
+    drawText(fuel,0.85*width,0.7*height);
   
 } // end draw()    DO NOT ADD ANY CODE PAST THIS LINE!!!!
